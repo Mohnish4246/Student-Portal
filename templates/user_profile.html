@@ -1,0 +1,51 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<section class="profile-page">
+    <div class="profile-page-heading">
+        <span class="profile-page-kicker">ACCOUNT</span>
+        <h1>My Profile</h1>
+        <p>Your personal account information.</p>
+    </div>
+
+    <div class="account-profile-card">
+        <div class="account-profile-banner">
+            <div class="account-avatar">
+                {{ profile.user.username|first|upper }}
+            </div>
+            <div>
+                <h2>{{ profile.user.get_full_name|default:profile.user.username }}</h2>
+                <p>@{{ profile.user.username }}</p>
+            </div>
+        </div>
+
+        <div class="account-profile-grid">
+            <div class="account-info-item">
+                <span>First Name</span>
+                <strong>{{ profile.user.first_name|default:"Not provided" }}</strong>
+            </div>
+            <div class="account-info-item">
+                <span>Last Name</span>
+                <strong>{{ profile.user.last_name|default:"Not provided" }}</strong>
+            </div>
+            <div class="account-info-item">
+                <span>Email Address</span>
+                <strong>{{ profile.user.email|default:"Not provided" }}</strong>
+            </div>
+            <div class="account-info-item">
+                <span>Date of Birth</span>
+                <strong>{{ profile.date_of_birth|default:"Not provided" }}</strong>
+            </div>
+            <div class="account-info-item">
+                <span>Guardian Name</span>
+                <strong>{{ profile.guardian_name|default:"Not provided" }}</strong>
+            </div>
+            <div class="account-info-item account-info-full">
+                <span>Address</span>
+                <strong>{{ profile.address|default:"Not provided" }}</strong>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

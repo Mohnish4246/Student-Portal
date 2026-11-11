@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<section class="course-stats-page">
+    <div class="stats-page-heading">
+        <div>
+            <span class="stats-kicker">ANALYTICS</span>
+            <h1>Course Statistics</h1>
+            <p>Review student enrollment across available courses.</p>
+        </div>
+        <div class="stats-total">
+            <strong>{{ courses|length }}</strong>
+            <span>Courses</span>
+        </div>
+    </div>
+
+    <div class="course-stats-grid">
+        {% for course in courses %}
+        <article class="course-stat-card">
+            <div class="course-stat-icon">📚</div>
+            <h2>{{ course.name }}</h2>
+            <div class="course-stat-number">{{ course.student_count }}</div>
+            <p>Enrolled students</p>
+            <a href="{% url 'course_detail' course.pk %}">View Course →</a>
+        </article>
+        {% empty %}
+        <div class="stats-empty">No courses found.</div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

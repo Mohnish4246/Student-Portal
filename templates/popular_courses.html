@@ -1,0 +1,29 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<section class="popular-page">
+    <div class="popular-heading">
+        <span class="popular-kicker">TRENDING</span>
+        <h1>Popular Courses</h1>
+        <p>Courses with strong student interest or Python-related focus.</p>
+    </div>
+
+    <div class="popular-list">
+        {% for course in courses %}
+        <article class="popular-course-card">
+            <div class="popular-rank">{{ forloop.counter|stringformat:"02d" }}</div>
+            <div class="popular-course-info">
+                <h2>{{ course.name }}</h2>
+                <p>{{ course.student_count }} enrolled student{{ course.student_count|pluralize }}</p>
+            </div>
+            <a href="{% url 'course_detail' course.pk %}" class="popular-view-btn">
+                View Details →
+            </a>
+        </article>
+        {% empty %}
+        <div class="stats-empty">No popular courses found yet.</div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

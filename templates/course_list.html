@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="courses-page">
+    <div class="courses-heading">
+        <div>
+            <span class="courses-kicker">LEARNING HUB</span>
+            <h1>Explore Courses</h1>
+            <p>Discover courses and explore the skills they offer.</p>
+        </div>
+        <div class="courses-count">
+            <strong>{{ courses|length }}</strong>
+            <span>Available Courses</span>
+        </div>
+    </div>
+
+    <div class="courses-grid">
+        {% for course in courses %}
+        <article class="course-card">
+            <div class="course-card-top">
+                <div class="course-icon">📘</div>
+                <span class="course-number">COURSE {{ forloop.counter|stringformat:"02d" }}</span>
+            </div>
+
+            <h2>{{ course.name }}</h2>
+
+            <div class="course-details">
+                {% if course.duration %}
+                <div>
+                    <span class="detail-label">Duration</span>
+                    <strong>{{ course.duration }}</strong>
+                </div>
+                {% endif %}
+
+                {% if course.fees %}
+                <div>
+                    <span class="detail-label">Fees</span>
+                    <strong>₹{{ course.fees }}</strong>
+                </div>
+                {% endif %}
+            </div>
+
+            <a href="{% url 'course_detail' course.pk %}" class="course-view-btn">
+                View Course Details <span>→</span>
+            </a>
+        </article>
+        {% empty %}
+        <div class="courses-empty">
+            <h2>No courses available</h2>
+            <p>Courses will appear here once they have been added.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

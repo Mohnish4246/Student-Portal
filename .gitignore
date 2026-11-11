@@ -1,0 +1,14 @@
+# Local database
+db.sqlite3 
+
+# Uploaded user files
+media/
+
+# cache files
+__pycache__/
+
+# Editor and operating system files
+.vscode/
+
+# Virtual environment
+venv/

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ course.name }}</h2>
+
+<p>Duration : {{ course.duration }} months</p>
+<p>Fees : ₹{{ course.fees }}</p>
+
+<h3>Students Enrolled</h3>
+{% for student in course.students.all %}
+    <p>
+        {{ student.name }} - {{ student.email }}
+    </p>
+{% empty %}
+<p>No student Enrolled in this Course.</p>
+{% endfor %}
+
+{% endblock %}

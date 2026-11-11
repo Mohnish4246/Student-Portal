@@ -1,0 +1,34 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<section class="top-students-page">
+    <div class="top-students-heading">
+        <span class="top-students-kicker">ACADEMIC EXCELLENCE</span>
+        <h1>Top Students</h1>
+        <p>Students who achieved 80 marks or higher.</p>
+    </div>
+
+    <div class="top-students-list">
+        {% for student in students %}
+        <article class="top-student-card">
+            <div class="top-student-rank">{{ forloop.counter|stringformat:"02d" }}</div>
+            <div class="top-student-info">
+                <h2>{{ student.name }}</h2>
+                <p>{{ student.course|default:"Course not specified" }}</p>
+            </div>
+            <div class="top-student-score">
+                <strong>{{ student.marks }}</strong>
+                <span>Marks</span>
+            </div>
+            <a href="{% url 'student_detail' student.pk %}" class="top-student-view">View →</a>
+        </article>
+        {% empty %}
+        <div class="top-students-empty">
+            <h2>No top students yet</h2>
+            <p>No students have marks above or equal to 80.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

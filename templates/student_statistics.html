@@ -1,0 +1,38 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<section class="student-stats-page">
+    <div class="student-stats-heading">
+        <span class="student-stats-kicker">PERFORMANCE OVERVIEW</span>
+        <h1>Student Statistics</h1>
+        <p>Academic performance summary for your students.</p>
+    </div>
+
+    <div class="student-stats-grid">
+        <article class="student-stat-card stat-blue">
+            <span class="student-stat-label">Total Students</span>
+            <strong>{{ total_students }}</strong>
+            <span class="student-stat-icon">👥</span>
+        </article>
+
+        <article class="student-stat-card stat-purple">
+            <span class="student-stat-label">Average Marks</span>
+            <strong>{{ average_marks|default:0|floatformat:2 }}</strong>
+            <span class="student-stat-icon">📊</span>
+        </article>
+
+        <article class="student-stat-card stat-green">
+            <span class="student-stat-label">Highest Marks</span>
+            <strong>{{ highest_marks|default:0 }}</strong>
+            <span class="student-stat-icon">🏆</span>
+        </article>
+
+        <article class="student-stat-card stat-orange">
+            <span class="student-stat-label">Lowest Marks</span>
+            <strong>{{ lowest_marks|default:0 }}</strong>
+            <span class="student-stat-icon">📉</span>
+        </article>
+    </div>
+</section>
+{% endblock %}

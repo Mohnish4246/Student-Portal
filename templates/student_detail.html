@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}{{ student.name }} | Student Profile{% endblock %}
+{% block content %}
+
+<div class="student-profile-page">
+    <a class="profile-back" href="{% url 'home' %}">← Back to Students</a>
+
+    <section class="profile-banner">
+        <div class="profile-person">
+            {% if student.profile_image %}
+                <img class="profile-photo" src="{{ student.profile_image.url }}" alt="{{ student.name }}">
+            {% else %}
+                <div class="profile-photo profile-initial">{{ student.name|first|upper }}</div>
+            {% endif %}
+
+            <div>
+                <span class="profile-eyebrow">STUDENT PROFILE · #{{ student.id }}</span>
+                <h1>{{ student.name|title }}</h1>
+                <p>{{ student.course.name|default:"Course not assigned" }}</p>
+                <span class="profile-status">
+                    {% if student.marks >= 40 %}● Active Student{% else %}● Needs Improvement{% endif %}
+                </span>
+            </div>
+        </div>
+
+        <a class="profile-edit-btn" href="{% url 'edit_student' student.id %}">✎ Edit Profile</a>
+    </section>
+
+    <section class="profile-overview">
+        <div class="score-card">
+            <span class="card-label">ACADEMIC SCORE</span>
+            <div class="score-number">{{ student.marks }}<small>/100</small></div>
+            <div class="score-track">
+                <div class="score-fill" style="width: {{ student.marks }}%;"></div>
+            </div>
+            <span class="score-result">
+                {% if student.marks >= 80 %}Excellent Performance
+                {% elif student.marks >= 60 %}Good Performance
+                {% elif student.marks >= 40 %}Passed
+                {% else %}Needs Improvement{% endif %}
+            </span>
+        </div>
+
+        <div class="overview-card">
+            <span class="overview-icon">🎓</span>
+            <span class="card-label">COURSE</span>
+            <strong>{{ student.course.name|default:"Not assigned" }}</strong>
+            <small>Academic program</small>
+        </div>
+
+        <div class="overview-card">
+            <span class="overview-icon">📍</span>
+            <span class="card-label">LOCATION</span>
+            <strong>{{ student.city|title }}</strong>
+            <small>Student city</small>
+        </div>
+    </section>
+
+    <section class="profile-section">
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">STUDENT DETAILS</span>
+                <h2>Personal Information</h2>
+            </div>
+        </div>
+
+        <div class="personal-grid">
+            <div class="personal-item"><span>✉ Email Address</span><strong>{{ student.email }}</strong></div>
+            <div class="personal-item"><span>☎ Phone Number</span><strong>{{ student.phone|default:"Not available" }}</strong></div>
+            <div class="personal-item"><span>♙ Age</span><strong>{{ student.age }} years</strong></div>
+            <div class="personal-item"><span>⌖ City</span><strong>{{ student.city|title }}</strong></div>
+        </div>
+    </section>
+
+    <section class="profile-section">
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">CAPABILITIES</span>
+                <h2>Skills & Expertise</h2>
+            </div>
+        </div>
+
+        <div class="profile-skill-list">
+            {% for skill in student.skills.all %}
+                <span>✦ {{ skill.name }}</span>
+            {% empty %}
+                <p>No skills added yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="profile-section profile-document-section">
+        <div>
+            <span class="section-kicker">FILES</span>
+            <h2>Student Document</h2>
+            <p>{% if student.document %}A document has been uploaded for this student.{% else %}No document uploaded yet.{% endif %}</p>
+        </div>
+        {% if student.document %}
+            <a class="profile-document-btn" href="{{ student.document.url }}" target="_blank" rel="noopener noreferrer">View Document ↗</a>
+        {% endif %}
+    </section>
+</div>
+
+{% endblock %}

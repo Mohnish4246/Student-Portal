@@ -1,0 +1,43 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<section class="skills-page">
+    <div class="skills-heading">
+        <div>
+            <span class="skills-kicker">SKILL DEVELOPMENT</span>
+            <h1>Explore Skills</h1>
+            <p>Discover skills and see which students are developing them.</p>
+        </div>
+        <div class="skills-count">
+            <strong>{{ skills|length }}</strong>
+            <span>Available Skills</span>
+        </div>
+    </div>
+
+    <div class="skills-grid">
+        {% for skill in skills %}
+        <article class="skill-card">
+            <div class="skill-card-top">
+                <div class="skill-icon">⚡</div>
+                <span class="skill-number">SKILL {{ forloop.counter|stringformat:"02d" }}</span>
+            </div>
+
+            <h2>{{ skill.name }}</h2>
+
+                <p class="skill-description">Explore this skill and its associated students.</p>
+           
+
+            <a href="{% url 'skill_detail' skill.pk %}" class="skill-view-btn">
+                View Skill Details <span>→</span>
+            </a>
+        </article>
+        {% empty %}
+        <div class="skills-empty">
+            <h2>No skills available</h2>
+            <p>Skills will appear here once they have been added.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,57 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<section class="admin-page">
+    <div class="admin-page-heading">
+        <div>
+            <span class="admin-page-kicker">ADMINISTRATION</span>
+            <h1>Admin Dashboard</h1>
+            <p>Overview of student records across the portal.</p>
+        </div>
+        <div class="admin-total">
+            <strong>{{ students|length }}</strong>
+            <span>Student Records</span>
+        </div>
+    </div>
+
+    <div class="admin-table-card">
+        <div class="admin-table-heading">
+            <h2>All Students</h2>
+            <span>Student Directory</span>
+        </div>
+
+        <div class="admin-table-wrap">
+            <table class="admin-students-table">
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Email</th>
+                        <th>Marks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>
+                            <div class="admin-student-name">
+                                <span class="admin-student-avatar">
+                                    {{ student.name|first|upper }}
+                                </span>
+                                <strong>{{ student.name }}</strong>
+                            </div>
+                        </td>
+                        <td>{{ student.email }}</td>
+                        <td><span class="admin-marks">{{ student.marks }}</span></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="admin-empty">No students found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
