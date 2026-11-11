@@ -108,7 +108,7 @@ Install:
 ### 2. Clone the repository
 
 ```bash
-git clone <YOUR_REPOSITORY_URL>
+git clone https://github.com/Mohnish4246/Student-Portal.git
 cd <YOUR_PROJECT_FOLDER>
 ```
 
